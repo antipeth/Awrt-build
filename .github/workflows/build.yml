@@ -6,7 +6,7 @@ on:
       project:
         description: "选择 WRT 项目"
         required: true
-        default: "immortalwrt"
+        default: "openwrt"
         type: choice
         options:
           - openwrt
@@ -35,7 +35,7 @@ on:
       config_path:
         description: "config路径"
         required: true
-        default: "config/myconfig"
+        default: "config/openwrt-linksys-e8450"
         type: string
 
 jobs:
