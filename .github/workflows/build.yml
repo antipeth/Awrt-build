@@ -119,21 +119,6 @@ jobs:
             https://raw.githubusercontent.com/immortalwrt/packages/refs/heads/master/libs/libcron/Makefile
           echo "✅ libcron Makefile 下载完成"
 
-      - name: Install DAE build dependencies
-        run: |
-          echo "🔧 安装 DAE 依赖 (clang-15, llvm-15, npm, pnpm)…"
-          sudo apt-get update
-          sudo apt-get install -y clang-15 llvm-15 npm
-          npm install -g pnpm
-          echo "✅ DAE 依赖安装完成"
-
-      - name: Build only luci-app-daed (debug)
-        working-directory: wrt
-        run: |
-          echo "🚧 单独编译 luci-app-daed 以验证…"
-          make package/dae/luci-app-daed/compile V=s
-          echo "✅ luci-app-daed 编译完成"
-
       - name: Copy diy.sh to WRT
         run: |
           echo "📂 复制 diy.sh 到 wrt 目录"
@@ -165,6 +150,21 @@ jobs:
           cd wrt
           echo "🔄 运行 make oldconfig"
           make oldconfig
+
+      - name: Install DAE build dependencies
+        run: |
+          echo "🔧 安装 DAE 依赖 (clang-15, llvm-15, npm, pnpm)…"
+          sudo apt-get update
+          sudo apt-get install -y clang-15 llvm-15 npm
+          npm install -g pnpm
+          echo "✅ DAE 依赖安装完成"
+
+      - name: Build only luci-app-daed (debug)
+        working-directory: wrt
+        run: |
+          echo "🚧 单独编译 luci-app-daed 以验证…"
+          make package/dae/luci-app-daed/compile V=s
+          echo "✅ luci-app-daed 编译完成"
 
       - name: Download source packages
         working-directory: wrt
