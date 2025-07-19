@@ -100,6 +100,11 @@ jobs:
           git clone --branch "${{ steps.refinfo.outputs.ref }}" \
             "${{ steps.projectinfo.outputs.url }}" wrt
 
+      - name: Clone Argon Luci Theme
+        run: |
+          echo "🎨 克隆 luci-theme-argon 主题中..."
+          git clone https://github.com/jerrykuku/luci-theme-argon.git wrt/package/luci-theme-argon
+          echo "✅ luci-theme-argon 克隆完成"
       - name: Copy diy.sh to WRT
         run: |
           echo "📂 复制 diy.sh 到 wrt 目录"
