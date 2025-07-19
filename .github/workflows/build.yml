@@ -100,25 +100,6 @@ jobs:
           git clone --branch "${{ steps.refinfo.outputs.ref }}" \
             "${{ steps.projectinfo.outputs.url }}" wrt
 
-      - name: Clone Argon Luci Theme
-        run: |
-          echo "🎨 克隆 luci-theme-argon 主题中..."
-          git clone https://github.com/jerrykuku/luci-theme-argon.git wrt/package/luci-theme-argon
-          echo "✅ luci-theme-argon 克隆完成"
-
-      - name: Clone luci-app-daed and libcron
-        working-directory: wrt
-        run: |
-          echo "📂 克隆 luci-app-daed 源码…"
-          git clone https://github.com/QiuSimons/luci-app-daed package/dae
-          echo "✅ luci-app-daed 克隆完成"
-
-          echo "📂 获取 libcron Makefile…"
-          mkdir -p Package/libcron
-          wget -O Package/libcron/Makefile \
-            https://raw.githubusercontent.com/immortalwrt/packages/refs/heads/master/libs/libcron/Makefile
-          echo "✅ libcron Makefile 下载完成"
-
       - name: Copy diy.sh to WRT
         run: |
           echo "📂 复制 diy.sh 到 wrt 目录"
@@ -150,7 +131,26 @@ jobs:
           cd wrt
           echo "🔄 运行 make oldconfig"
           make oldconfig
+          
+      - name: Clone Argon Luci Theme
+        run: |
+          echo "🎨 克隆 luci-theme-argon 主题中..."
+          git clone https://github.com/jerrykuku/luci-theme-argon.git wrt/package/luci-theme-argon
+          echo "✅ luci-theme-argon 克隆完成"
 
+      - name: Clone luci-app-daed and libcron
+        working-directory: wrt
+        run: |
+          echo "📂 克隆 luci-app-daed 源码…"
+          git clone https://github.com/QiuSimons/luci-app-daed package/dae
+          echo "✅ luci-app-daed 克隆完成"
+
+          echo "📂 获取 libcron Makefile…"
+          mkdir -p Package/libcron
+          wget -O Package/libcron/Makefile \
+            https://raw.githubusercontent.com/immortalwrt/packages/refs/heads/master/libs/libcron/Makefile
+          echo "✅ libcron Makefile 下载完成"
+          
       - name: Install DAE build dependencies
         run: |
           echo "🔧 安装 DAE 依赖 (clang-15, llvm-15, npm, pnpm)…"
