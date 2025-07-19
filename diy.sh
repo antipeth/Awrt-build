@@ -50,11 +50,12 @@ if [ -f "scripts/custom-files/banner.txt" ]; then
   cp scripts/custom-files/banner.txt package/base-files/files/etc/banner
 else
   cat >package/base-files/files/etc/banner <<'EOF'
-|   | _____   _____   ____________/  |______  |  |
-|   |/     \ /     \ /  _ \_  __ \   __\__  \ |  |
-|   |  Y Y  \  Y Y  (  <_> )  | \/|  |  / __ \|  |__
-|___|__|_|  /__|_|  /\____/|__|   |__| (____  /____/
-          \/      \/             By Dich    \/
+   _____  __      __          __
+  /  _  \/  \    /  \________/  |_
+ /  /_\  \   \/\/   /\_  __ \   __\
+/    |    \        /  |  | \/|  |
+\____|__  /\__/\  /   |__|   |__|
+        \/      \/  by Atp
 -----------------------------------------------------
 EOF
 fi
