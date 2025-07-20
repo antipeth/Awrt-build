@@ -6,7 +6,7 @@ on:
       project:
         description: "选择 WRT 项目"
         required: true
-        default: "openwrt"
+        default: "immortalwrt"
         type: choice
         options:
           - openwrt
@@ -35,7 +35,7 @@ on:
       config_path:
         description: "config路径"
         required: true
-        default: "config/openwrt-linksys-e8450"
+        default: "config/myconfig"
         type: string
 
 jobs:
@@ -132,12 +132,6 @@ jobs:
           echo "🔄 运行 make oldconfig"
           make oldconfig
           
-      - name: Clone Argon Luci Theme
-        run: |
-          echo "🎨 克隆 luci-theme-argon 主题中..."
-          git clone https://github.com/jerrykuku/luci-theme-argon.git wrt/package/luci-theme-argon
-          echo "✅ luci-theme-argon 克隆完成"
-
       - name: Download source packages
         working-directory: wrt
         run: |
@@ -165,7 +159,7 @@ jobs:
         with:
           name: ${{ inputs.project }}-output
           path: |
-            wrt/bin/targets/**/*.{img,bin,tar.gz,zip}
+            wrt/bin/targets/**/*.{img,bin,tar.gz,zip,itb,fip}
 
       - name: Upload build log
         uses: actions/upload-artifact@v4
