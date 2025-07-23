@@ -15,14 +15,14 @@ echo "🚀 添加自定义 feed 源..."
 echo "✅ feeds 添加完成"
 
 # 1. 默认 hostname
-sed -i 's/=ImmortalWrt/=Dwrt/' package/base-files/files/bin/config_generate
+sed -i 's/ImmortalWrt/Awrt/' package/base-files/files/bin/config_generate
 
 # 2. 默认 IP 地址
-sed -i 's/192.168.1.1/192.168.1.1/' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/192.168.6.1/' package/base-files/files/bin/config_generate
 
 # 3. 默认 root 密码
 HASH=$(openssl passwd -1 'password')
-sed -i "s|root::0:0:99999|root:${HASH}:0:0:99999|" package/base-files/files/etc/shadow
+sed -i "s|root:::0:99999|root:${HASH}:0:0:99999|" package/base-files/files/etc/shadow
 
 # 4. 设置默认 LuCI 主题为 argon
 mkdir -p package/base-files/files/etc/uci-defaults
