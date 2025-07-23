@@ -159,7 +159,7 @@ jobs:
         with:
           name: ${{ inputs.project }}-output
           path: |
-            wrt/bin/targets/**/**/*.{img,bin,tar.gz,zip,itb,fip}
+            wrt/bin/targets/*/*/*.{img,bin,tar.gz,zip,itb,fip}
 
       - name: Upload build log
         uses: actions/upload-artifact@v4
