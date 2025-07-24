@@ -153,13 +153,24 @@ jobs:
           END=$(date "+%Y-%m-%d %H:%M:%S")
           echo "✅ 编译成功"
           echo "⏱️ 结束：${END}"
+          
+      - name: Detect target firmware directory
+        id: detect
+        run: |
+          TARGET_DIR=$(find wrt/bin/targets -mindepth 2 -maxdepth 2 -type d | head -n1)
+          echo "firmware_dir=$TARGET_DIR" >> $GITHUB_OUTPUT
 
-      - name: Upload firmware artifacts
+      - name: Upload firmware images
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ inputs.project }}-output
+          name: ${{ inputs.project }}-firmware
           path: |
-            wrt/bin/targets/*/*/*.{img,bin,tar.gz,zip,itb,fip}
+            ${{ steps.detect.outputs.firmware_dir }}/*.bin
+            ${{ steps.detect.outputs.firmware_dir }}/*.img
+            ${{ steps.detect.outputs.firmware_dir }}/*.tar.gz
+            ${{ steps.detect.outputs.firmware_dir }}/*.zip
+            ${{ steps.detect.outputs.firmware_dir }}/*.itb
+            ${{ steps.detect.outputs.firmware_dir }}/*.fip
 
       - name: Upload build log
         uses: actions/upload-artifact@v4
